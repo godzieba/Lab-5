@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import exceptions.DeckException;
 import netgame.common.Hub;
@@ -50,6 +51,24 @@ public class PokerHub extends Hub {
 	protected void messageReceived(int ClientID, Object message) {
 
 		if (message instanceof Action) {
+			
+			if (((Action) message).getAction() == eAction.StartGame)
+			{
+				Rule rule = new Rule(eGame.FiveStud);
+				GamePlay gameplay = new GamePlay(rule, UUID.randomUUID());
+			}
+			else if (((Action) message).getAction() == eAction.Sit)
+			{
+				HubPokerTable.AddPlayerToTable(); // What player are we adding? - Dan
+			}
+			else if (((Action) message).getAction() == eAction.Leave)
+			{
+				
+			}
+			else if (((Action) message).getAction() == eAction.GameState)
+			{
+				
+			}
 			
 			//TODO: If the Action = StartGame, start the game...
 			//		Create an instance of GamePlay, set all the parameters
